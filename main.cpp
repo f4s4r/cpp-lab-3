@@ -1,38 +1,31 @@
 #include <iostream>
+using namespace std;
 
-
-int min_dif(int i, long long sum_1, long long sum_2, int* variab){
-    if (i == start)
-        return abs(sum_1 - sum_2); //если рекурсия полностью прошла, то возвращает последюю разницу
-    int fst_var = min_dif(i + 1, sum_1 + variab[i], sum_2, variab);
-    int scnd_var = min_dif(i + 1, sum_1, sum_2 + variab[i], variab);
-    return std::min()
+int main_func(int n, int array[], int step, int fst_sum, int snd_sum){
+    if (step == n) {
+        return abs(fst_sum - snd_sum);
+    }
+    //int fst_var = main_func(n, array, step + 1, fst_sum + array[step], snd_sum);
+    //int snd_var = main_func(n, array, step + 1, fst_sum, snd_sum + array[step]);
+    //return min(fst_sum, snd_sum);
+    return min(
+            main_func(n, array, step + 1, fst_sum + array[step], snd_sum),
+            main_func(n, array, step + 1, fst_sum, snd_sum + array[step])
+            );
 }
 
-int main() {
-    int start, i = 0;
-    long long cur = 0, dif = 1000, dif_cur;
-    const int size = 32;
-    std::cin >> start;
-    if (1 <= start && start <= 32) { // проверка на то, что что 1 <= n <= 32
-        std::cout << start << std::endl;
+int main(){
+    int n_chashek, cur_m = 0;
+    cin >> n_chashek;
+
+    if (32 < n_chashek || n_chashek < 2)
+        exit(42);
+
+    int m_chashek[n_chashek];
+    for (int i = 0; i < n_chashek; ++i){
+        cin >> cur_m;
+        m_chashek[i] = cur_m;
     }
-    else {
-        exit(42); // выход из работы с кодом 42, потому что 42 это прикольное число
-    }
-
-    int variab[start]; //создание массива для записывания данных
-
-    for (i; i < start; ++i){ //этот for записывает граммовки чашечек в variab
-        std::cin >> cur;
-        variab[i] = cur;
-    }
-
-    for (int i = 0; i < start; ++i) {
-        dif = min_dif(0, 0, 0, variab);
-    }
-
-    std::cout << dif;
-
+    cout << main_func(n_chashek, m_chashek, 0, 0, 0);
     return 0;
-    }
+}
