@@ -21,7 +21,7 @@ int main(){
     if (32 < n_chashek || n_chashek < 2)
         exit(42);
 
-    int m_chashek[n_chashek];
+    int *m_chashek = (int *)malloc(n_chashek);
     for (int i = 0; i < n_chashek; ++i){
         cin >> cur_m;
         m_chashek[i] = cur_m;
