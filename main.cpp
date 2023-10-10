@@ -27,5 +27,8 @@ int main(){
         m_chashek[i] = cur_m;
     }
     cout << main_func(n_chashek, m_chashek, 0, 0, 0);
+
+    free(m_chashek);
+
     return 0;
 }
